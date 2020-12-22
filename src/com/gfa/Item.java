@@ -3,8 +3,8 @@ package com.gfa;
 public class Item {
 
     public String task;
-    public Boolean isDone;
-    public int due;
+    private Boolean isDone;
+    private int due;
 
     public Item(String task) {
         this.task = task;
@@ -12,8 +12,26 @@ public class Item {
         this.due = 0;
     }
 
+    public void setDone(Boolean isDone) {
+        this.isDone = isDone;
+    }
+
+    public void setDue(int due) {
+        this.due = due;
+    }
+
+    public Boolean getDone() {
+        return isDone;
+    }
+
+    public int getDue() {
+        return due;
+    }
+
     @Override
     public String toString() {
         return task;
     }
+
+
 }
