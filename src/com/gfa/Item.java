@@ -1,9 +1,5 @@
 package com.gfa;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
 public class Item {
 
     public String task;
@@ -16,6 +12,7 @@ public class Item {
         this.due = 0;
     }
 
+    @Override
     public String toString() {
         return task;
     }

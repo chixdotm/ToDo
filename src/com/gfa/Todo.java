@@ -1,16 +1,5 @@
 package com.gfa;
 
-import java.io.IOException;
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-
-//import com.gfa.StickyNote;
-//import com.gfa.Item;
-
 public class Todo {
 
     public static void main(String[] args) {
@@ -25,9 +14,9 @@ public class Todo {
         System.out.println("new: " + firstNote.toString());
         System.out.println(firstNote.title);
 
-        System.out.println("additem: " + firstNote.addItem(firstNote, firstTask));
+        System.out.println("addItem: " + firstNote.addItem(firstNote, firstTask));
         System.out.println("added: " + firstNote.toString());
-        System.out.println("additem: " + firstNote.addItem(firstNote, secondTask));
+        System.out.println("addItem: " + firstNote.addItem(firstNote, secondTask));
         System.out.println("added: " + firstNote.toString());
 
 
