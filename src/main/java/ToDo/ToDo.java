@@ -1,6 +1,6 @@
-package com.gfa;
+package ToDo;
 
-public class Todo {
+public class ToDo {
 
     public static void main(String[] args) {
 
@@ -65,3 +65,4 @@ public class Todo {
 
     }
 }
+
