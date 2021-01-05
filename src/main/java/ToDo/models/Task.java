@@ -1,12 +1,14 @@
-package ToDo;
+package ToDo.models;
 
-public class Item {
+import ToDo.ToDo;
+
+public class Task {
 
     public String task;
     private Boolean isDone;
     private int due;
 
-    public Item(String task) {
+    public Task(String task) {
         this.task = task;
         this.isDone = false;
         this.due = 0;
@@ -18,6 +20,10 @@ public class Item {
 
     public void setDue(int due) {
         this.due = due;
+    }
+
+    public String getTask() {
+        return task;
     }
 
     public Boolean getDone() {
