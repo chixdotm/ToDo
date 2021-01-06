@@ -20,25 +20,25 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ToDo {
-
-    public static String file = "ToDo.txt";
     private ToDoRepository todoRepository;
     private ToDoService todoService;
     private ToDoController todoController;
+    public static String file = "Sticky/ToDo2.txt";
 
-    public static final Gson GSON = new Gson();
+//    public static final Gson GSON = new Gson();
 
     public ToDo() {
         todoRepository = new ToDoFileRepository(file, ";");
         todoService = new ToDoServiceImp(todoRepository);
         todoController = new ToDoConsoleController(todoService);
     }
-    
+
 
     public static void main(String[] args) {
 
         try {
             File toDoFile = new File(file);
+            toDoFile.mkdirs();
             if (toDoFile.createNewFile()) {
                 System.out.println("File created: " + toDoFile.getName());
             } else {
@@ -59,10 +59,12 @@ public class ToDo {
             toDo.handleArgs(argsA);
         }
 
+
+
+
 //        String firstNoteName = "First Note";
 //        String firstTask = "1. Task";
 //        String secondTask = "2. Push ToDo";
-//
 //
 //        List<Task> notes = new ArrayList<>();
 //        StickyNote firstNote = new StickyNote(firstNoteName);
