@@ -22,15 +22,15 @@ public class ToDoServiceImp implements ToDoService {
     }
 
     @Override
-    public void printToDoList() {
-        StickyNote stickyNote = loadStickyNote();
+    public void printToDoList(String name) {
+        StickyNote stickyNote = loadStickyNote(name);
         System.out.println(stickyNote);
         System.out.println("stickyNote:: " + stickyNote);
     }
 
     @Override
-    public StickyNote addTask(List<String> taskStrings) {
-        StickyNote stickyNote = loadStickyNote();
+    public StickyNote addTask(String name, List<String> taskStrings) {
+        StickyNote stickyNote = loadStickyNote(name);
         List<Task> newTasks = toDoRepository.convertTasks(taskStrings);
         stickyNote.addTasks(newTasks);
         toDoRepository.save(stickyNote);
@@ -74,8 +74,8 @@ public class ToDoServiceImp implements ToDoService {
         return sb.toString();
     }
 
-    private StickyNote loadStickyNote() {
-        return toDoRepository.readNotes();
+    private StickyNote loadStickyNote(String name) {
+        return toDoRepository.readNotes(name);
     }
 
 

@@ -15,7 +15,7 @@ import java.util.List;
 
 public class ToDoFileRepository implements ToDoRepository {
 
-    private Path filePath;
+    private final Path filePath;
     private String separator;
     public static final Gson GSON = new Gson();
     public String stickyDir = Settings.STICKY_PATH;
@@ -26,9 +26,10 @@ public class ToDoFileRepository implements ToDoRepository {
     }
 
     @Override
-    public StickyNote readNotes() {
+    public StickyNote readNotes(String name) {
         try {
             System.out.println("filePath:: " + filePath);
+            System.out.println("stickyDir: " + stickyDir);
             List<String> taskStrings = Files.readAllLines(filePath);
             List<Task> tasks = convertTasks(taskStrings);
             System.out.println("tasks:: " + tasks);
@@ -101,7 +102,6 @@ public class ToDoFileRepository implements ToDoRepository {
     @Override
     public void createSticky(String name) {
         String newName = name.replaceAll("[\\[\\]\\(\\)]", "");
-//        String stickyDir = Settings.STICKY_PATH;
         try {
             File toDoFile = new File(stickyDir + newName + ".txt");
             File path = new File(stickyDir);
@@ -120,19 +120,31 @@ public class ToDoFileRepository implements ToDoRepository {
 
     @Override
     public StickyNote readSticky(File file) {
-        File path = new File(stickyDir);
-        System.out.println("readSticky:");
         for (final File fileEntry : file.listFiles()) {
-            System.out.println(fileEntry.getName());
             if (fileEntry.isDirectory()) {
-                System.out.println("isDir");
-                System.out.println(fileEntry);
                 readSticky(fileEntry);
             } else {
-                System.out.println("notDir");
                 System.out.println(fileEntry.getName());
             }
         }
         return null;
     }
+
+//    @Override
+//    public StickyNote readSticky(File file) {
+//        File path = new File(stickyDir);
+//        System.out.println("readSticky:");
+//        for (final File fileEntry : file.listFiles()) {
+//            System.out.println(fileEntry.getName());
+//            if (fileEntry.isDirectory()) {
+//                System.out.println("isDir");
+//                System.out.println(fileEntry);
+//                readSticky(fileEntry);
+//            } else {
+//                System.out.println("notDir");
+//                System.out.println(fileEntry.getName());
+//            }
+//        }
+//        return null;
+//    }
 }

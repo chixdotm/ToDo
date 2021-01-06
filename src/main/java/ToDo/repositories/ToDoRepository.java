@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ToDoRepository {
 
-    StickyNote readNotes();
+    StickyNote readNotes(String name);
 
     StickyNote createNotes(String name);
 

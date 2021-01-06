@@ -9,9 +9,9 @@ public interface ToDoService {
 
     void printUsage();
 
-    void printToDoList();
+    void printToDoList(String name);
 
-    StickyNote addTask(List<String> toDoStrings);
+    StickyNote addTask(String name, List<String> toDoStrings);
 
     void stop();
 

@@ -1,29 +1,19 @@
 package ToDo;
 
-import ToDo.models.StickyNote;
-import ToDo.models.Task;
 import ToDo.repositories.ToDoFileRepository;
 import ToDo.repositories.ToDoRepository;
 import ToDo.services.ToDoService;
 import ToDo.services.ToDoServiceImp;
 import ToDo.controllers.ToDoController;
 import ToDo.controllers.ToDoConsoleController;
-import com.google.gson.Gson;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class ToDo {
     private ToDoRepository todoRepository;
     private ToDoService todoService;
     private ToDoController todoController;
-    public static String file = "Sticky/ToDo2.txt";
+    public static String file = Settings.STICKY_PATH;
 
 //    public static final Gson GSON = new Gson();
 
@@ -36,30 +26,32 @@ public class ToDo {
 
     public static void main(String[] args) {
 
-        try {
-            File toDoFile = new File(file);
-            toDoFile.mkdirs();
-            if (toDoFile.createNewFile()) {
-                System.out.println("File created: " + toDoFile.getName());
-            } else {
-                System.out.println("File already exists.");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            File StickyNoteFile = new File(file);
+//            StickyNoteFile.mkdirs();
+//            if (StickyNoteFile.createNewFile()) {
+//                System.out.println("File created: " + StickyNoteFile.getName());
+//            } else {
+//                System.out.println("File already exists.");
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
         ToDo toDo = new ToDo();
         toDo.handleArgs(null);
 
-        for (; true; ) {
-            System.out.println("args:");
-            Scanner in = new Scanner(System.in);
-            String arg = in.nextLine();
-            String[] argsA = arg.split(" ");
+        while (true) {
+            String[] argsA = readConsole().split(" ");
+
+            for (String str : argsA
+                 ) {
+                System.out.println("str:");
+                System.out.println(str);
+            }
+
             toDo.handleArgs(argsA);
         }
-
-
 
 
 //        String firstNoteName = "First Note";
@@ -97,7 +89,7 @@ public class ToDo {
 //            e.printStackTrace();
 //        }
 //    }
-
+//
 //    public static void add(String newTask) throws IOException {
 //        List<String> content = new ArrayList();
 //        content.add(newTask);
@@ -110,6 +102,15 @@ public class ToDo {
 //        Path filePath = Paths.get(FILENAME);
 //        List<String> lines = Files.readAllLines(filePath);
 //        System.out.println("read(): " + lines.get(0));
+
+
+    }
+
+    private static String readConsole() {
+        System.out.println("args:");
+        Scanner in = new Scanner(System.in);
+        String arg = in.nextLine();
+        return arg;
     }
 
     public void handleArgs(String[] args) {
