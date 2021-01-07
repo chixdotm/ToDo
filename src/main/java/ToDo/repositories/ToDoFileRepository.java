@@ -26,21 +26,6 @@ public class ToDoFileRepository implements ToDoRepository {
     }
 
     @Override
-    public StickyNote readNotes(String name) {
-        try {
-            System.out.println("filePath:: " + filePath);
-            System.out.println("stickyDir: " + stickyDir);
-            List<String> taskStrings = Files.readAllLines(filePath);
-            List<Task> tasks = convertTasks(taskStrings);
-            System.out.println("tasks:: " + tasks);
-            return new StickyNote("new", tasks);
-        } catch (IOException e) {
-            System.err.println("Unable to read file.");
-            return null;
-        }
-    }
-
-    @Override
     public StickyNote createNotes(String name) {
         StickyNote stickyNote = new StickyNote(name);
         return stickyNote;
@@ -100,12 +85,12 @@ public class ToDoFileRepository implements ToDoRepository {
     }
 
     @Override
-    public void createSticky(String name) {
+    public void createStickyFile(String name) {
         String newName = name.replaceAll("[\\[\\]\\(\\)]", "");
         try {
             File toDoFile = new File(stickyDir + newName + ".txt");
             File path = new File(stickyDir);
-            if (path.mkdirs()){
+            if (path.mkdirs()) {
                 System.out.println("dir created: " + path);
             }
             if (toDoFile.createNewFile()) {
@@ -119,10 +104,10 @@ public class ToDoFileRepository implements ToDoRepository {
     }
 
     @Override
-    public StickyNote readSticky(File file) {
+    public StickyNote ListStickyFiles(File file) {
         for (final File fileEntry : file.listFiles()) {
             if (fileEntry.isDirectory()) {
-                readSticky(fileEntry);
+                ListStickyFiles(fileEntry);
             } else {
                 System.out.println(fileEntry.getName());
             }
@@ -147,4 +132,26 @@ public class ToDoFileRepository implements ToDoRepository {
 //        }
 //        return null;
 //    }
+
+    @Override
+    public StickyNote readNotes(String name) {
+
+        System.out.println("name: " + name);
+        System.out.println("filePath:: " + filePath);
+        System.out.println("stickyDir: " + stickyDir);
+        String File = filePath.toString() + "/" +name+".txt";
+        System.out.println("File: " + File);
+        Path path = Paths.get(File);
+
+        try {
+            List<String> taskStrings = Files.readAllLines(path);
+            System.out.println("taskStrings: " + taskStrings.toString());
+            List<Task> tasks = convertTasks(taskStrings);
+            System.out.println("tasks:: " + tasks);
+            return new StickyNote(name, tasks);
+        } catch (IOException e) {
+            System.err.println("Unable to read file.");
+            return null;
+        }
+    }
 }

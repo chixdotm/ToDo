@@ -19,8 +19,10 @@ public interface ToDoService {
 
     void saveSticky(String name);
 
-    void createSticky(String name);
+    void createStickyFile(String name);
 
-    void readSticky(File folder);
+    void ListStickyFiles(File folder);
+
+    String readFromConsole();
 
 }

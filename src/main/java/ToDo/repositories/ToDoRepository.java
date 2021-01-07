@@ -24,8 +24,8 @@ public interface ToDoRepository {
 
     void saveSticky(StickyNote stickyNote);
 
-    void createSticky(String name);
+    void createStickyFile(String name);
 
-    StickyNote readSticky(File folder);
+    StickyNote ListStickyFiles(File folder);
 
 }

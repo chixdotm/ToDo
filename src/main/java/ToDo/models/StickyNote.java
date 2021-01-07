@@ -2,6 +2,7 @@ package ToDo.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public class StickyNote {
@@ -71,5 +72,16 @@ public class StickyNote {
         //TODO
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        StickyNote that = (StickyNote) o;
+        return getTitle().equals(that.getTitle());
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(getTitle());
+    }
 }

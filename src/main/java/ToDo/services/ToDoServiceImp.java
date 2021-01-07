@@ -7,6 +7,7 @@ import ToDo.repositories.ToDoRepository;
 
 import java.io.File;
 import java.util.List;
+import java.util.Scanner;
 
 public class ToDoServiceImp implements ToDoService {
 
@@ -55,14 +56,22 @@ public class ToDoServiceImp implements ToDoService {
     }
 
     @Override
-    public void createSticky(String name) {
-        toDoRepository.createSticky(name);
+    public void createStickyFile(String name) {
+        toDoRepository.createStickyFile(name);
     }
 
     @Override
-    public void readSticky(File folder) {
-        toDoRepository.readSticky(folder);
+    public void ListStickyFiles(File folder) {
+        toDoRepository.ListStickyFiles(folder);
     }
+
+    @Override
+    public String readFromConsole() {
+        System.out.println("input:");
+        Scanner in = new Scanner(System.in);
+        String input = in.nextLine();
+        System.out.println(input);
+        return input;    }
 
     private String tasksToPrint(List<String> tasks) {
         StringBuilder sb = new StringBuilder();

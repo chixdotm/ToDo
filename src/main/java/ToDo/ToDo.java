@@ -7,8 +7,6 @@ import ToDo.services.ToDoServiceImp;
 import ToDo.controllers.ToDoController;
 import ToDo.controllers.ToDoConsoleController;
 
-import java.util.Scanner;
-
 public class ToDo {
     private ToDoRepository todoRepository;
     private ToDoService todoService;
@@ -40,16 +38,12 @@ public class ToDo {
 
         ToDo toDo = new ToDo();
         toDo.handleArgs(null);
-
         while (true) {
-            String[] argsA = readConsole().split(" ");
-
-            for (String str : argsA
-                 ) {
+            String[] argsA = toDo.readFromConsole().split(" ");
+            for (String str : argsA) {
                 System.out.println("str:");
                 System.out.println(str);
             }
-
             toDo.handleArgs(argsA);
         }
 
@@ -106,11 +100,9 @@ public class ToDo {
 
     }
 
-    private static String readConsole() {
-        System.out.println("args:");
-        Scanner in = new Scanner(System.in);
-        String arg = in.nextLine();
-        return arg;
+    public String readFromConsole() {
+        String input = todoService.readFromConsole();
+        return input;
     }
 
     public void handleArgs(String[] args) {
