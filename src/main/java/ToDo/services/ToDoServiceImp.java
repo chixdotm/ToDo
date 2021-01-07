@@ -26,7 +26,6 @@ public class ToDoServiceImp implements ToDoService {
     public void printToDoList(String name) {
         StickyNote stickyNote = loadStickyNote(name);
         System.out.println(stickyNote);
-        System.out.println("stickyNote:: " + stickyNote);
     }
 
     @Override
@@ -69,9 +68,8 @@ public class ToDoServiceImp implements ToDoService {
     public String readFromConsole() {
         System.out.println("input:");
         Scanner in = new Scanner(System.in);
-        String input = in.nextLine();
-        System.out.println(input);
-        return input;    }
+        return in.nextLine();
+    }
 
     private String tasksToPrint(List<String> tasks) {
         StringBuilder sb = new StringBuilder();

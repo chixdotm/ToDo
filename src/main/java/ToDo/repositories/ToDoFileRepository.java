@@ -12,6 +12,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ToDoFileRepository implements ToDoRepository {
 
@@ -27,8 +28,7 @@ public class ToDoFileRepository implements ToDoRepository {
 
     @Override
     public StickyNote createNotes(String name) {
-        StickyNote stickyNote = new StickyNote(name);
-        return stickyNote;
+        return new StickyNote(name);
     }
 
     @Override
@@ -81,20 +81,18 @@ public class ToDoFileRepository implements ToDoRepository {
     public void saveSticky(StickyNote stickyNote) {
         String name = stickyNote.getTitle();
         System.out.println(name);
-
     }
 
     @Override
     public void createStickyFile(String name) {
-        String newName = name.replaceAll("[\\[\\]\\(\\)]", "");
         try {
-            File toDoFile = new File(stickyDir + newName + ".txt");
+            File StickyFile = new File(stickyDir + name + ".txt");
             File path = new File(stickyDir);
             if (path.mkdirs()) {
                 System.out.println("dir created: " + path);
             }
-            if (toDoFile.createNewFile()) {
-                System.out.println("File created: " + toDoFile.getName());
+            if (StickyFile.createNewFile()) {
+                System.out.println("File created: " + StickyFile.getName());
             } else {
                 System.out.println("File already exists.");
             }
@@ -105,7 +103,7 @@ public class ToDoFileRepository implements ToDoRepository {
 
     @Override
     public StickyNote ListStickyFiles(File file) {
-        for (final File fileEntry : file.listFiles()) {
+        for (final File fileEntry : Objects.requireNonNull(file.listFiles())) {
             if (fileEntry.isDirectory()) {
                 ListStickyFiles(fileEntry);
             } else {
@@ -115,6 +113,22 @@ public class ToDoFileRepository implements ToDoRepository {
         return null;
     }
 
+    @Override
+    public StickyNote readNotes(String name) {
+        String File = stickyDir + name + ".txt";
+        System.out.println("File: " + File);
+        Path path = Paths.get(File);
+        try {
+            List<String> taskStrings = Files.readAllLines(path);
+            System.out.println("taskStrings: " + taskStrings.toString());
+            List<Task> tasks = convertTasks(taskStrings);
+            System.out.println("tasks:: " + tasks);
+            return new StickyNote(name, tasks);
+        } catch (IOException e) {
+            System.err.println("Unable to read file.");
+            return null;
+        }
+    }
 //    @Override
 //    public StickyNote readSticky(File file) {
 //        File path = new File(stickyDir);
@@ -131,27 +145,6 @@ public class ToDoFileRepository implements ToDoRepository {
 //            }
 //        }
 //        return null;
+
 //    }
-
-    @Override
-    public StickyNote readNotes(String name) {
-
-        System.out.println("name: " + name);
-        System.out.println("filePath:: " + filePath);
-        System.out.println("stickyDir: " + stickyDir);
-        String File = filePath.toString() + "/" +name+".txt";
-        System.out.println("File: " + File);
-        Path path = Paths.get(File);
-
-        try {
-            List<String> taskStrings = Files.readAllLines(path);
-            System.out.println("taskStrings: " + taskStrings.toString());
-            List<Task> tasks = convertTasks(taskStrings);
-            System.out.println("tasks:: " + tasks);
-            return new StickyNote(name, tasks);
-        } catch (IOException e) {
-            System.err.println("Unable to read file.");
-            return null;
-        }
-    }
 }

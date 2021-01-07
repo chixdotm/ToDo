@@ -23,31 +23,12 @@ public class ToDo {
 
 
     public static void main(String[] args) {
-
-//        try {
-//            File StickyNoteFile = new File(file);
-//            StickyNoteFile.mkdirs();
-//            if (StickyNoteFile.createNewFile()) {
-//                System.out.println("File created: " + StickyNoteFile.getName());
-//            } else {
-//                System.out.println("File already exists.");
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
         ToDo toDo = new ToDo();
         toDo.handleArgs(null);
         while (true) {
             String[] argsA = toDo.readFromConsole().split(" ");
-            for (String str : argsA) {
-                System.out.println("str:");
-                System.out.println(str);
-            }
             toDo.handleArgs(argsA);
         }
-
-
 //        String firstNoteName = "First Note";
 //        String firstTask = "1. Task";
 //        String secondTask = "2. Push ToDo";
@@ -96,13 +77,10 @@ public class ToDo {
 //        Path filePath = Paths.get(FILENAME);
 //        List<String> lines = Files.readAllLines(filePath);
 //        System.out.println("read(): " + lines.get(0));
-
-
     }
 
     public String readFromConsole() {
-        String input = todoService.readFromConsole();
-        return input;
+        return todoService.readFromConsole();
     }
 
     public void handleArgs(String[] args) {
