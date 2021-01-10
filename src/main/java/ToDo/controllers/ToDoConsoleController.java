@@ -46,16 +46,8 @@ public class ToDoConsoleController implements ToDoController {
             toDoService.addTask(name, params);
 
 
-//        } else if (operator.equals(Settings.NEW_STICKY_OPERATION) && operation.length > 1) {
-//            toDoService.newStickyNote(params.toString());
-
-
         } else if (operator.equals(Settings.LIST_STICKY_FILES_OPERATION)) {
             toDoService.ListStickyFiles(filePath);
-
-
-//        } else if (operator.equals(Settings.WRITE_OPERATION) && operation.length > 1) {
-//            toDoService.saveSticky(params.toString());
 
 
         } else {

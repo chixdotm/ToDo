@@ -31,7 +31,8 @@ public class ToDoServiceImp implements ToDoService {
     @Override
     public StickyNote addTask(String name, List<String> taskStrings) {
         StickyNote stickyNote = loadStickyNote(name);
-        List<Task> newTasks = toDoRepository.convertTasks(taskStrings);
+        System.out.println("loaded Sticky: " + stickyNote);
+        List<Task> newTasks = toDoRepository.convertTasksToTaskList(taskStrings);
         stickyNote.addTasks(newTasks);
         toDoRepository.save(stickyNote);
         System.out.println(tasksToPrint(toDoRepository.convertTasksToStringList(stickyNote.getTasks())));
@@ -41,17 +42,6 @@ public class ToDoServiceImp implements ToDoService {
     @Override
     public void stop() {
         System.exit(0);
-    }
-
-    @Override
-    public StickyNote newStickyNote(String name) {
-        return null;
-    }
-
-    @Override
-    public void saveSticky(String name) {
-        StickyNote stickyNote = new StickyNote(name);
-        toDoRepository.saveSticky(stickyNote);
     }
 
     @Override
@@ -82,7 +72,7 @@ public class ToDoServiceImp implements ToDoService {
     }
 
     private StickyNote loadStickyNote(String name) {
-        return toDoRepository.readNotes(name);
+        return toDoRepository.readStickyFile(name);
     }
 
 

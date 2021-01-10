@@ -15,10 +15,6 @@ public interface ToDoService {
 
     void stop();
 
-    StickyNote newStickyNote(String name);
-
-    void saveSticky(String name);
-
     void createStickyFile(String name);
 
     void ListStickyFiles(File folder);
