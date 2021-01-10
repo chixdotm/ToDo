@@ -17,6 +17,7 @@ public class ToDoServiceImp implements ToDoService {
         this.toDoRepository = toDoRepository;
     }
 
+
     @Override
     public void printUsage() {
         System.out.println(Settings.USAGE);
@@ -74,6 +75,4 @@ public class ToDoServiceImp implements ToDoService {
     private StickyNote loadStickyNote(String name) {
         return toDoRepository.readJSONStickyFile(name);
     }
-
-
 }

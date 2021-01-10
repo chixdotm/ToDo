@@ -1,7 +1,5 @@
 package ToDo.models;
 
-import ToDo.ToDo;
-
 public class Task {
 
     public String task;

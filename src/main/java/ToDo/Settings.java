@@ -6,14 +6,14 @@ public class Settings {
             "=============================\n" +
             "\n" +
             "Parancssori argumentumok:\n" +
-            "    -U           ---Kiírja USAGE-t\n" +
-            "    -t name      ---Create StickyNoteFile\n" +
-            "    -L           ---List StickyNoteFile\n" +
-            "    -P name      ---Print name.txt\n" +
-            "    -a add1...   ---Új feladatot ad hozzá\n" +
-            "    -r              /Eltávolít egy feladatot\n" +
-            "    -c              /Teljesít egy feladatot\n" +
-            "    -e           ---Exit";
+            "    -U           --- Kiírja USAGE-t\n" +
+            "    -t name      --- Create StickyNoteFile\n" +
+            "    -L           --- List StickyNoteFile\n" +
+            "    -P name      --- Print name.txt\n" +
+            "    -a add1...   --- Új feladatot ad hozzá\n" +
+            "    -r           (Does not work!!) Eltávolít egy feladatot\n" +
+            "    -c           (Does not work!!) Teljesít egy feladatot\n" +
+            "    -e           --- Exit";
 
     public static final String USAGE_OPERATION = "-U";
     public static final String CREATE_STICKY_FILE_OPERATION = "-t";

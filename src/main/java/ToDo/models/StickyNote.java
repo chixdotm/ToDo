@@ -4,17 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-
 public class StickyNote {
 
     public String title;
     private List<Task> tasks;
-
-    public StickyNote(String title, List<Task> newTasks) {
-        this.title = title;
-        tasks = new ArrayList<>();
-        tasks.addAll(newTasks);
-    }
 
     public StickyNote(String title) {
         this.title = title;
@@ -39,8 +32,6 @@ public class StickyNote {
         return "StickyNote{ title='" + title + '\'' +
                 ", tasks=" + tasks +
                 '}';
-
-        //TODO
     }
 
     @Override
