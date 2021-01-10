@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,10 +27,6 @@ public class ToDoFileRepository implements ToDoRepository {
         this.separator = separator;
     }
 
-    @Override
-    public StickyNote createNotes(String name) {
-        return new StickyNote(name);
-    }
 
     @Override
     public List<Task> convertTasksToTaskList(List<String> taskStrings) {
@@ -56,25 +53,23 @@ public class ToDoFileRepository implements ToDoRepository {
     @Override
     public String convertStickyToJSON(StickyNote stickyNote) {
         String jsonNote = GSON.toJson(stickyNote);
-        System.out.println("jsonNote: " + jsonNote);
         return jsonNote;
     }
 
     @Override
     public StickyNote convertJSONToSticky(String jsonNote) {
         StickyNote fromJsonNote = GSON.fromJson(jsonNote, StickyNote.class);
-        System.out.println("fromJSON: " + fromJsonNote);
         return fromJsonNote;
     }
 
     @Override
-    public void save(StickyNote stickyNote) {
+    public void saveJSON(StickyNote stickyNote) {
+
         String File = stickyDir + stickyNote.getTitle() + ".txt";
         System.out.println("File: " + File);
-        List<String> taskStrings = convertTasksToStringList(stickyNote.getTasks());
+        String jsonString = convertStickyToJSON(stickyNote);
         try {
-            System.out.println("filePath: " + filePath);
-            Files.write(Paths.get(File), taskStrings);
+            Files.write(Paths.get(File), Collections.singleton(jsonString));
         } catch (IOException e) {
             System.err.println("Unable to write file.");
         }
@@ -90,6 +85,8 @@ public class ToDoFileRepository implements ToDoRepository {
             }
             if (StickyFile.createNewFile()) {
                 System.out.println("File created: " + StickyFile.getName());
+                StickyNote stickyNote = new StickyNote(name);
+                saveJSON(stickyNote);
             } else {
                 System.out.println("File already exists.");
             }
@@ -111,14 +108,15 @@ public class ToDoFileRepository implements ToDoRepository {
     }
 
     @Override
-    public StickyNote readStickyFile(String name) {
+    public StickyNote readJSONStickyFile(String name) {
         String File = stickyDir + name + ".txt";
         System.out.println("File: " + File);
         Path path = Paths.get(File);
         try {
             List<String> taskStrings = Files.readAllLines(path);
-            List<Task> tasks = convertTasksToTaskList(taskStrings);
-            return new StickyNote(name, tasks);
+            String jsonString = taskStrings.get(0);
+            StickyNote stickyNote = convertJSONToSticky(jsonString);
+            return stickyNote;
         } catch (IOException e) {
             System.err.println("Unable to read file.");
             return null;

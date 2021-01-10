@@ -28,8 +28,8 @@ public class ToDoConsoleController implements ToDoController {
             toDoService.printUsage();
 
 
-        } else if (operator.equals(Settings.LIST_OPERATION) && operation.length > 1) {
-            toDoService.printToDoList(params.get(0));
+        } else if (operator.equals(Settings.PRINT_STICKY_NOTE_OPERATION) && operation.length > 1) {
+            toDoService.printStickyNote(params.get(0));
 
 
         } else if (operator.equals(Settings.EXIT_OPERATION)) {

@@ -9,7 +9,7 @@ public interface ToDoService {
 
     void printUsage();
 
-    void printToDoList(String name);
+    void printStickyNote(String name);
 
     StickyNote addTask(String name, List<String> toDoStrings);
 

@@ -8,9 +8,7 @@ import java.util.List;
 
 public interface ToDoRepository {
 
-    StickyNote readStickyFile(String name);
-
-    StickyNote createNotes(String name);
+    StickyNote readJSONStickyFile(String name);
 
     List<Task> convertTasksToTaskList(List<String> taskStrings);
 
@@ -20,7 +18,7 @@ public interface ToDoRepository {
 
     StickyNote convertJSONToSticky(String jsonNote);
 
-    void save(StickyNote stickyNote);
+    void saveJSON(StickyNote stickyNote);
 
     void createStickyFile(String name);
 

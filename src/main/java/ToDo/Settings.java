@@ -8,10 +8,8 @@ public class Settings {
             "Parancssori argumentumok:\n" +
             "    -U           ---Kiírja USAGE-t\n" +
             "    -t name      ---Create StickyNoteFile\n" +
-            "    -w              /Write StickyNote\n" +
             "    -L           ---List StickyNoteFile\n" +
-            "    -s              /List StickyNotes\n" +
-            "    -P name      ---name.txt print\n" +
+            "    -P name      ---Print name.txt\n" +
             "    -a add1...   ---Új feladatot ad hozzá\n" +
             "    -r              /Eltávolít egy feladatot\n" +
             "    -c              /Teljesít egy feladatot\n" +
@@ -19,9 +17,8 @@ public class Settings {
 
     public static final String USAGE_OPERATION = "-U";
     public static final String CREATE_STICKY_FILE_OPERATION = "-t";
-    public static final String WRITE_OPERATION = "-w";
     public static final String LIST_STICKY_FILES_OPERATION = "-L";
-    public static final String LIST_OPERATION = "-P";
+    public static final String PRINT_STICKY_NOTE_OPERATION = "-P";
     public static final String ADD_OPERATION = "-a";
     public static final String EXIT_OPERATION = "-e";
 
